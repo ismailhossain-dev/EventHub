@@ -7,7 +7,7 @@ interface Iuser {
     password: string
 }
 const createUser = async (payload:Iuser) => {
-console.log("user post data user.service.ts file", payload)
+console.log("user post data user.service.ts file", payload)//success
 
   const user = await prisma.user.create({
     data: payload,
