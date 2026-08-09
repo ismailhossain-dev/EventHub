@@ -19,7 +19,7 @@ const getAllRooms = async () => {
 
 const getHomeRooms = async () => {
   const rooms = await prisma.room.findMany({
-    take: 3,
+    take: 6,
   });
 
   return rooms;

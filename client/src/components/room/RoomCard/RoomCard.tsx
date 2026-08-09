@@ -9,7 +9,7 @@ interface RoomCardProps {
 
 const RoomCard = ({ room }: RoomCardProps) => {
   // room ডাটার ভেতর id, date, description ইত্যাদি না থাকলে ফলব্যাক হ্যান্ডেল করার জন্য
-  const { id, image, title, location, price, date = "FEB 14-2028" } = room as any;
+  const { id, image, title, location, price } = room as any;
 
   return (
     <Link 
@@ -25,11 +25,7 @@ const RoomCard = ({ room }: RoomCardProps) => {
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
 
-        {/* Date Badge (Matched with reference design) */}
-        <div className="absolute left-4 bottom-[-20px] w-16 h-16 bg-[#ff2e63] text-white rounded-full flex flex-col items-center justify-center text-center shadow-lg border-2 border-white z-10 text-[10px] font-bold uppercase tracking-wider leading-tight">
-          <span className="text-[11px] font-extrabold">{date.split(' ')[0] || 'FEB'}</span>
-          <span>{date.split(' ')[1] || '14-2028'}</span>
-        </div>
+
       </div>
 
       {/* Content Area */}
@@ -59,7 +55,7 @@ const RoomCard = ({ room }: RoomCardProps) => {
             Get Ticket
           </span>
           <span className="text-sm font-extrabold text-[#ff2e63]">
-            {price || '$5-$10'}
+            ৳ {price || '$5-$10'}
           </span>
         </div>
 
