@@ -13,10 +13,10 @@ app.get('/', (req, res) => {
 })
 //post user
 app.use("/api/users",useRoutes );
-//DELETE http://localhost:5000/api/users?email=test@gmail.com
+//DELETE users?email=test@gmail.com
 app.use("/api/users",userDeleteRoutes )
 //user get in email
-//http://localhost:5000/api/users?email=hello69k@gmail.com
+//users?email=hello69k@gmail.com
 app.use("/api/users",getSIngleUser )
 
 //get all user room.route.ts file teke asbe useRoutes ta
