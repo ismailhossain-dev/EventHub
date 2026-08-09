@@ -2,3 +2,12 @@
 
 
 
+.btn {
+  @apply border text-white 
+         rounded-2xl text-center px-6 py-2
+         shadow-md shadow-black/20
+         transition-all duration-300
+         bg-[#f53f7b]
+         border-[#f53f7b]
+         hover:shadow-lg hover:shadow-[#f53f7b]/30;
+}

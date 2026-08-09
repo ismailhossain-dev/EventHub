@@ -13,7 +13,7 @@ const RoomCard = ({ room }: RoomCardProps) => {
 
   return (
     <Link 
-      href={`/rooms/${id || 'details'}`} 
+      href={`/all-events/${id || 'details'}`} 
       className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full cursor-pointer no-underline text-inherit"
     >
       {/* Image Container */}

@@ -27,7 +27,7 @@ export default async function Home() {
    <div>
     <Navbar/>
     <Hero/>
-    <PopularCategories/>
+    {/* <PopularCategories/> */}
     <HomeRooms rooms ={rooms}></HomeRooms>
     <Footer/>
    </div>
