@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { ArrowUp } from 'lucide-react';
+import Logo from '../Logo/Logo';
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -17,17 +18,9 @@ export default function Footer() {
           
           {/* Brand & Info Column (Span 6) */}
           <div className="lg:col-span-6 flex flex-col space-y-4">
-            <Link href="/" className="flex items-center gap-3 no-underline">
-              <div className="text-white">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 10L12 3L21 10V20C21 20.5523 20.5523 21 20 21H15V15H9V21H4C3.44772 21 3 20.5523 3 20V10Z" fill="white"/>
-                </svg>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-white text-[18px] md:text-[22px] font-extrabold tracking-wider">EVENTHUB</span>
-                <span className="text-[#94a3b8] text-[9px] md:text-[10px] font-semibold tracking-wide">EXPERIENCE MANAGED EVENTS</span>
-              </div>
-            </Link>
+            <div className="flex items-center gap-3 no-underline">
+             <Logo/>
+            </div>
 
             <p className="text-[#94a3b8] text-sm max-w-md leading-relaxed">
               EventHub simplifies event planning, ticket booking, and unforgettable gatherings with verified venues, secure transactions, and expert support making your experience easy and stress-free.

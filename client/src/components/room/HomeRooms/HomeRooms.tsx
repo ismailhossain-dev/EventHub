@@ -17,7 +17,8 @@ const HomeRooms = ({ rooms }: HomeRoomsProps) => {
           <Title className="">FEATURED EVENTS</Title>
           <p className="text-gray-500">You can choose to display feaured , Upcomming, Past Events here</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 ">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 l
+      md:gap-6 ">
       {rooms.map((room) => (
         <RoomCard
           key={room.id}

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { LogOut, LayoutDashboard, Menu, X, ChevronRight } from 'lucide-react';
 import Container from '../Container/Container';
+import Logo from '../Logo/Logo';
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -24,17 +25,7 @@ export default function Navbar() {
         <div className=" flex items-center justify-between h-20">
         
         {/* Logo Section */}
-        <Link href="/" className="flex items-center gap-3 no-underline">
-          <div className="text-white">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 10L12 3L21 10V20C21 20.5523 20.5523 21 20 21H15V15H9V21H4C3.44772 21 3 20.5523 3 20V10Z" fill="white"/>
-            </svg>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-white text-[18px] md:text-[22px] font-extrabold tracking-wider">EventHub</span>
-            <span className="text-[#94a3b8] text-[9px] md:text-[10px] font-semibold tracking-wide">LIVING SOLUTIONS</span>
-          </div>
-        </Link>
+        <Logo/>
 
         {/* Desktop Navigation Links */}
         <nav className="hidden lg:flex items-center space-x-8">
