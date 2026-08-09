@@ -13,6 +13,32 @@ const getAllRooms = async () => {
   return rooms;
 };
 
+
+// get home rooms
+
+const getHomeRooms = async () => {
+  const rooms = await prisma.room.findMany({
+    //ekane bole divo room koita lagbe
+    take: 6,
+  });
+
+  return rooms;
+};
+
+// get details room 
+
+const getDetailsRoom = async (id: string) => {
+  const room = await prisma.room.findUnique({
+    where: {
+      id: id,
+    },
+  });
+
+  return room;
+};
+
 export const roomService = {
   getAllRooms,
+  getHomeRooms,
+  getDetailsRoom
 };

@@ -20,6 +20,36 @@ const createUser = async (req: Request, res: Response) => {
   }
 };
 
+// Delete user
+const deleteUser = async (req: Request, res: Response) => {
+  try {
+    const { email } = req.query;
+
+    if (!email || typeof email !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Email is required",
+      });
+    }
+
+    const user = await userService.deleteUser(email);
+
+    res.status(200).json({
+      success: true,
+      message: "User deleted successfully",
+      data: user,
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to delete user",
+    });
+  }
+};
+
 export const userController = {
   createUser,
+  deleteUser
 };

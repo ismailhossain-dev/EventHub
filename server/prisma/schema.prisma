@@ -9,6 +9,7 @@ generator client {
   // ekane bole deya hoiche generated/prisma ta kothay jenarate hobe
   output   = "../src/generated/prisma"
 }
+
 datasource db {
   provider = "postgresql"
 }
@@ -43,16 +44,10 @@ model Room {
   category     String
   description  String
   number       Int
-  price        Float
+  price        Int
   capacity     Int
   bedType      String
   size         String
   amenities    String[]
-  availability Boolean  @default(true)
-  isDeleted    Boolean  @default(false)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
-  @@index([category])
-  @@map("rooms")
+  availability Boolean
 }

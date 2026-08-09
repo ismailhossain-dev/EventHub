@@ -5,6 +5,7 @@ interface Iuser {
     email: string,
     password: string
 }
+
 const createUser = async (payload:Iuser) => {
 console.log("user post data user.service.ts file", payload)//success
 
@@ -15,6 +16,17 @@ console.log("user post data user.service.ts file", payload)//success
   return user;
 };
 
+//Delete user
+const deleteUser = async (email: string) => {
+  const user = await prisma.user.delete({
+    where: {
+      email,
+    },
+  });
+
+  return user;
+};
 export const userService = {
   createUser,
+  deleteUser
 };

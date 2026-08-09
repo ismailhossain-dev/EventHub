@@ -38,7 +38,8 @@ const room = [
       "Hot Water",
       "Breakfast Included"
     ],
-    "availability": true
+    "availability": true,
+    "phone": "+8801712345678"
   },
   {
     "image": "https://images.unsplash.com/photo-1590490360182-c33d57733427",
@@ -60,7 +61,8 @@ const room = [
       "Private Balcony",
       "Mini Bar"
     ],
-    "availability": true
+    "availability": true,
+    "phone": "+8801812345678"
   },
   {
     "image": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b",
@@ -82,7 +84,8 @@ const room = [
       "Hot Water",
       "Breakfast Included"
     ],
-    "availability": true
+    "availability": true,
+    "phone": "+8801912345678"
   },
   {
     "image": "https://images.unsplash.com/photo-1611892440504-42a792e24d32",
@@ -104,7 +107,8 @@ const room = [
       "Private Lounge",
       "Luxury Bathroom"
     ],
-    "availability": true
+    "availability": true,
+    "phone": "+8801612345678"
   },
   {
     "image": "https://images.unsplash.com/photo-1595576508898-0ad5c879a061",
@@ -126,7 +130,8 @@ const room = [
       "Hot Water",
       "Breakfast Included"
     ],
-    "availability": true
+    "availability": true,
+    "phone": "+8801512345678"
   },
   {
     "image": "https://images.unsplash.com/photo-1564078516393-cf04bd966897",
@@ -148,7 +153,8 @@ const room = [
       "Hot Water",
       "Free Parking"
     ],
-    "availability": true
+    "availability": true,
+    "phone": "+8801312345678"
   },
   {
     "image": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461",
@@ -170,7 +176,8 @@ const room = [
       "Breakfast Included",
       "Room Service"
     ],
-    "availability": true
+    "availability": true,
+    "phone": "+8801412345678"
   },
   {
     "image": "https://images.unsplash.com/photo-1591088398332-8a7791972843",
@@ -192,7 +199,8 @@ const room = [
       "Family Lounge",
       "Breakfast Included"
     ],
-    "availability": true
+    "availability": true,
+    "phone": "+8801212345678"
   },
   {
     "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c",
@@ -214,7 +222,8 @@ const room = [
       "Luxury Bathroom",
       "Breakfast Included"
     ],
-    "availability": true
+    "availability": true,
+    "phone": "+8801112345678"
   },
   {
     "image": "https://images.unsplash.com/photo-1540518614846-7eded433c457",
@@ -236,7 +245,8 @@ const room = [
       "Daily Housekeeping",
       "Room Service"
     ],
-    "availability": true
+    "availability": true,
+    "phone": "+8801819876543"
   },
   {
     "image": "https://images.unsplash.com/photo-1590490359683-658d3d23f972",
@@ -258,7 +268,8 @@ const room = [
       "Hot Water",
       "Breakfast Included"
     ],
-    "availability": true
+    "availability": true,
+    "phone": "+8801719876543"
   },
   {
     "image": "https://images.unsplash.com/photo-1618773928121-c32242e63f39",
@@ -280,7 +291,8 @@ const room = [
       "Living Room",
       "Private Parking"
     ],
-    "availability": true
+    "availability": true,
+    "phone": "+8801919876543"
   }
 ]
 

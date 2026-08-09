@@ -1,7 +1,7 @@
 // just express setup 
 import express, { type Application } from "express"
-import { useRoutes } from "./modules/user/user.route.js"
-import { useRoomRoutes } from "./modules/room/room.route.js"
+import {  userDeleteRoutes, useRoutes } from "./modules/user/user.route.js"
+import { detailsRoutes, roomsHomeRoutes, useRoomRoutes } from "./modules/room/room.route.js"
 const app:Application = express()
 
 
@@ -13,8 +13,14 @@ app.get('/', (req, res) => {
 })
 //post user
 app.use("/api/users",useRoutes );
+//DELETE http://localhost:5000/api/users?email=test@gmail.com
+app.use("/api/users",userDeleteRoutes )
 //get all user room.route.ts file teke asbe useRoutes ta
 app.use("/api/rooms", useRoomRoutes );
+// get home rooms
+app.use("/api/home-rooms",roomsHomeRoutes)
+// get room details 
+app.use("/api/rooms", detailsRoutes);
 
 //app ta amra server.ts file chalai
 export default app;
