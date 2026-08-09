@@ -26,7 +26,22 @@ const deleteUser = async (email: string) => {
 
   return user;
 };
+
+//Get user in email 
+
+const getUserByEmail = async(email: string) => {
+ const user = await prisma.user.findUnique({
+  where: {
+    email
+  }
+ });
+ return user
+}
+
+
 export const userService = {
   createUser,
-  deleteUser
+  deleteUser,
+  getUserByEmail
 };
+

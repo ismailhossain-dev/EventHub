@@ -49,7 +49,47 @@ const deleteUser = async (req: Request, res: Response) => {
   }
 };
 
+
+//Get Single user by email
+
+const getUserByEmail = async (req: Request, res: Response) => {
+  try {
+    const { email } = req.query;
+
+    if (!email || typeof email !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Email is required",
+      });
+    }
+
+    const user = await userService.getUserByEmail(email);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "User retrieved successfully",
+      data: user,
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to get user",
+    });
+  }
+};
+
+
 export const userController = {
   createUser,
-  deleteUser
+  deleteUser,
+  getUserByEmail
 };

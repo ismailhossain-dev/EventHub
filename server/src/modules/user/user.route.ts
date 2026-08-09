@@ -9,8 +9,12 @@ export const useRoutes = router;
 
 
 // Delete Router
-const deleteRouter = Router();
 
-deleteRouter.delete("/", userController.deleteUser);
+router.delete("/", userController.deleteUser);
 
-export const userDeleteRoutes = deleteRouter;
+export const userDeleteRoutes = router;
+
+// get user by email 
+
+router.get("/", userController.getUserByEmail);
+export const getSIngleUser = router; 
