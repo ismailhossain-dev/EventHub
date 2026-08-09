@@ -99,10 +99,9 @@ export const RoomScalarFieldEnum = {
   size: 'size',
   amenities: 'amenities',
   availability: 'availability',
-  isDeleted: 'isDeleted',
   phone: 'phone',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  isDeleted: 'isDeleted',
+  createdAt: 'createdAt'
 } as const
 
 export type RoomScalarFieldEnum = (typeof RoomScalarFieldEnum)[keyof typeof RoomScalarFieldEnum]

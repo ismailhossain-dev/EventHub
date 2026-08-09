@@ -34,7 +34,6 @@ model User {
 }
 
 // product json 
-
 model Room {
   id           String   @id @default(cuid())
   image        String
@@ -50,4 +49,8 @@ model Room {
   size         String
   amenities    String[]
   availability Boolean
+
+  phone        String
+  isDeleted    Boolean  @default(false)
+  createdAt    DateTime @default(now())
 }

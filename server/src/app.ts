@@ -15,14 +15,14 @@ app.get('/', (req, res) => {
 app.use("/api/users",useRoutes );
 //DELETE users?email=test@gmail.com
 app.use("/api/users",userDeleteRoutes )
-//user get in email
+
 //users?email=hello69k@gmail.com
 app.use("/api/users",getSIngleUser )
 
 //get all user room.route.ts file teke asbe useRoutes ta
 app.use("/api/rooms", useRoomRoutes );
 // get home rooms
-app.use("/api/home-rooms",roomsHomeRoutes)
+app.use("/api/home-rooms", roomsHomeRoutes);
 // get room details 
 app.use("/api/rooms", detailsRoutes);
 

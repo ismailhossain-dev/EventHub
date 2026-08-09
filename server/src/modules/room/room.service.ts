@@ -1,5 +1,6 @@
+import { prisma } from "../../db/prisma.js";
+
 //step-1 get room
-import { prisma } from "../../db/prisma.js"
 const getAllRooms = async () => {
   const rooms = await prisma.room.findMany({
     where: {
@@ -18,8 +19,7 @@ const getAllRooms = async () => {
 
 const getHomeRooms = async () => {
   const rooms = await prisma.room.findMany({
-    //ekane bole divo room koita lagbe
-    take: 6,
+    take: 3,
   });
 
   return rooms;

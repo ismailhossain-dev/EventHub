@@ -2,6 +2,7 @@
 import type { Request, Response } from "express";
 import { roomService } from "./room.service.js";
 
+
 const getAllRooms = async (req: Request, res: Response) => {
   try {
     const rooms = await roomService.getAllRooms();
@@ -34,6 +35,8 @@ const getHomeRooms = async (req: Request, res: Response) => {
       data: rooms,
     });
   } catch (error) {
+    console.error(error);
+
     res.status(500).json({
       success: false,
       message: "Failed to get rooms",
