@@ -1,6 +1,6 @@
 // file-2 user  rq res handle
 import { type Request, type Response } from "express";
-import { userService } from "./user.service";
+import { userService } from "./user.service.js";
 
 const createUser = async (req: Request, res: Response) => {
   try {

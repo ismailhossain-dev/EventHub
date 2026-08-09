@@ -3,11 +3,12 @@
 
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
+//amader eta nerate korte hobe src vitor
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
+  // ekane bole deya hoiche generated/prisma ta kothay jenarate hobe
+  output   = "../src/generated/prisma"
 }
-
 datasource db {
   provider = "postgresql"
 }
@@ -20,13 +21,38 @@ enum Role {
 // user prisma
 
 model User {
- id           String  @id @default(cuid())
-  name       String
-  email      String   @unique
-  password   String
-  role       Role     @default(USER)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("users")
+}
+
+// product json 
+
+model Room {
+  id           String   @id @default(cuid())
+  image        String
+  title        String
+  roomNumber   String
+  location     String
+  category     String
+  description  String
+  number       Int
+  price        Float
+  capacity     Int
+  bedType      String
+  size         String
+  amenities    String[]
+  availability Boolean  @default(true)
+  isDeleted    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([category])
+  @@map("rooms")
 }

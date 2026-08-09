@@ -1,5 +1,4 @@
-import { prisma } from "../../db/prisma";
-
+import { prisma } from "../../db/prisma.js";
 
 interface Iuser {
     name: string,
