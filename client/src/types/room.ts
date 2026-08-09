@@ -18,8 +18,3 @@ export interface Room {
     createdAt: string
 }
 
-export interface RoomResponse {
-    success: boolean;
-    message: string,
-    data: Room[]
-}
