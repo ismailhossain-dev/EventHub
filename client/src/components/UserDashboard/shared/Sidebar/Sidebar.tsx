@@ -9,6 +9,7 @@ import {
   LogOut 
 } from 'lucide-react';
 import Logo from '@/components/shared/Logo/Logo';
+import { signOut } from 'next-auth/react';
 
 const sidebarLinks = [
   {
@@ -36,16 +37,14 @@ const sidebarLinks = [
 export default function Sidebar() {
   const pathname = usePathname();
 
-  const handleLogout = () => {
-    console.log("Logged out successfully");
-  };
+ 
 
   return (
     <aside className="w-64 bg-white text-gray-800 flex flex-col justify-between h-full p-6 font-sans">
       
       {/* Top Section: Logo & Navigation */}
       <div className="flex flex-col space-y-8">
-        <div className="flex items-center">
+        <div className="flex items-center ">
           <Logo />
         </div>
 
@@ -74,7 +73,7 @@ export default function Sidebar() {
       {/* Bottom Section: Logout Button */}
       <div className="pt-6 border-t border-gray-100">
         <button
-          onClick={handleLogout}
+          onClick={()=> signOut()}
           className="w-full flex items-center justify-center gap-2.5 bg-gray-900 text-white hover:bg-black font-semibold text-sm py-3 px-4 rounded-xl shadow-md transition-all duration-300 transform active:scale-95 cursor-pointer"
         >
           <LogOut size={18} className="text-[#ff2e63]" />

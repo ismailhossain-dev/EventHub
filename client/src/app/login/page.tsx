@@ -1,6 +1,5 @@
-
 import LoginForm from '@/components/Forms/LoginForm/LoginForm'
-import React from 'react'
+
 
 function RootLogin() {
   return (

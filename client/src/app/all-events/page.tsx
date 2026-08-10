@@ -9,7 +9,7 @@ import axios from "axios";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const getAllEvents = async () => {
   try {
-    const response = await axios.get(`${API_URL}/rooms`);
+    const response = await axios.get(`${API_URL}/api/rooms`);
 
     return response.data.data;
   } catch (error) {

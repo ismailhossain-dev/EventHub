@@ -21,7 +21,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const findCategories = async () => {
   try {
-    const res = await axios.get(`${API_URL}/rooms`);
+    const res = await axios.get(`${API_URL}/api/rooms`);
     return res.data?.data || res.data || [];
   } catch (error) {
     console.error("Failed to fetch categories:", error);

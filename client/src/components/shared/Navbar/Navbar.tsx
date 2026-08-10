@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { LogOut, LayoutDashboard, Menu, X, ChevronRight } from 'lucide-react';
 import Container from '../Container/Container';
 import Logo from '../Logo/Logo';
+import { useSession } from 'next-auth/react';
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -18,6 +19,13 @@ export default function Navbar() {
     { name: 'ABOUT US', path: '/about' },
     { name: 'DASHBOARD', path: '/user' },
   ];
+
+  const {data:session , status} = useSession()
+  if(status==="loading"){
+    return <p>Loading....</p>
+  }
+
+  console.log("alhamdulillah navbar users ", session)
 
   return (
     <header className="w-full sticky top-0 z-50 bg-[#121c24] text-white shadow-md border-b border-white/10 font-sans">

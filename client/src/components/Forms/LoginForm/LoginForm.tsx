@@ -13,6 +13,8 @@ import {
   ArrowLeft,
 } from "lucide-react";
 import Container from "@/components/shared/Container/Container";
+import { toast } from "react-toastify";
+import { signIn } from "next-auth/react";
 
 const LoginForm = () => {
   // State for form inputs and password visibility
@@ -22,14 +24,27 @@ const LoginForm = () => {
   const [rememberMe, setRememberMe] = useState(false);
 
   // Form submit handler to show console values
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
     console.log("Login Form Data Submitted:", {
       email,
       password,
       rememberMe,
     });
-    alert(`Logged in successfully as: ${email}`);
+     const result = await signIn("credentials", {
+    email,
+    password,
+    redirect: false,
+  });
+
+  if (result?.error) {
+    alert("Invalid email or password");
+    return;
+  }
+
+  toast.success("Login successful!");
+
+  window.location.href = "/";
   };
 
   return (

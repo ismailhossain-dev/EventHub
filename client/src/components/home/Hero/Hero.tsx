@@ -47,16 +47,14 @@ const Hero = () => {
         </p>
 
         {/* Search Bar Form (Matched with reference screenshot design: Left dark label block + pill/rounded wrapper + dark search button) */}
-        <form
+        {/* <form
           onSubmit={handleSearch}
           className="w-full bg-white text-black rounded-2xl lg:rounded-full p-2 shadow-2xl flex flex-col lg:flex-row items-center gap-2"
         >
-          {/* Left Segment: Property Search / Title box */}
+          
           <div className="w-full lg:w-auto bg-[#121c24] text-white px-6 py-3.5 rounded-xl lg:rounded-l-full font-bold text-sm tracking-wide shrink-0 text-center lg:text-left">
             Property Search
           </div>
-
-          {/* What are you looking for input */}
           <div className="flex items-center gap-2 px-4 py-3 w-full lg:flex-1 lg:border-l border-gray-200">
             <Search size={18} className="text-gray-400 shrink-0" />
             <input
@@ -68,8 +66,7 @@ const Hero = () => {
             />
           </div>
 
-          {/* Purpose Dropdown */}
-          <div className="w-full lg:w-[180px] px-4 py-3 lg:border-l border-gray-200 text-sm text-gray-600 flex items-center justify-between">
+          <div className="w-full lg:w-45 px-4 py-3 lg:border-l border-gray-200 text-sm text-gray-600 flex items-center justify-between">
             <select
               value={purpose}
               onChange={(e) => setPurpose(e.target.value)}
@@ -82,7 +79,6 @@ const Hero = () => {
             </select>
           </div>
 
-          {/* Location Dropdown */}
           <div className="w-full lg:w-[180px] px-4 py-3 lg:border-l border-gray-200 text-sm text-gray-600 flex items-center justify-between">
             <select
               value={location}
@@ -96,16 +92,16 @@ const Hero = () => {
             </select>
           </div>
 
-          {/* Search Button (Dark pill style matching the screenshot reference) */}
+
           <button
             type="submit"
             className="w-full lg:w-auto bg-[#121c24] hover:bg-[#1e293b] text-white font-semibold px-7 py-3.5 rounded-xl lg:rounded-r-full transition-all text-sm tracking-wide shrink-0 flex items-center justify-center gap-2 shadow-md cursor-pointer"
           >
             <Search size={16} /> Search Property
           </button>
-        </form>
+        </form> */}
 
-        {/* Filter Pills Below Search Bar */}
+        {/* Filter Pills Below Search Bar
         <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
           <span className="text-xs text-gray-300 font-medium">
             Or browse event by feature:
@@ -131,7 +127,7 @@ const Hero = () => {
           >
             <Grid size={14} className="text-blue-400" /> All Events
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Lustria } from "next/font/google";
 import "./globals.css";
+import { ToastContainer } from "react-toastify";
+import NextAuthProvider from "@/provider/NextAuthProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 //custom font
 const lustria = Lustria({
-  subsets: ['latin'],
-  weight: '400', 
-  variable: '--font-lustria', 
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-lustria",
 });
 
 export const metadata: Metadata = {
@@ -25,11 +27,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${lustria.className}  h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" className={`${lustria.className}  h-full antialiased`}>
+      <NextAuthProvider>
+        <body className="min-h-full flex flex-col">
+          <main>{children}</main>
+          <ToastContainer />
+        </body>
+      </NextAuthProvider>
     </html>
   );
 }

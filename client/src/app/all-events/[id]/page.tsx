@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import Link from 'next/link';
 import axios from 'axios';
@@ -21,6 +22,7 @@ import Navbar from '@/components/shared/Navbar/Navbar';
 import Footer from '@/components/shared/Footer/Footer';
 import Container from '@/components/shared/Container/Container';
 
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
 interface RoomDetailsPageProps {
@@ -31,9 +33,11 @@ interface RoomDetailsPageProps {
 
 const RoomDetailsPage = async ({ params }: RoomDetailsPageProps) => {
   const { id } = await params;
+  
+  console.log("details id", id);
 
   try {
-    const response = await axios.get(`${API_URL}/rooms/${id}`);
+    const response = await axios.get(`${API_URL}/api/rooms/${id}`);
     const room = response.data.data || response.data; // API স্ট্রাকচার অনুযায়ী
 
     const { 

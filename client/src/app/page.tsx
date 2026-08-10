@@ -11,7 +11,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 // fetch data
 const getHomeRooms = async () => {
   try {
-    const response = await axios.get(`${API_URL}/home-rooms`);
+    const response = await axios.get(`${API_URL}/api/home-rooms`);
 
     return response.data.data;
   } catch (error) {
