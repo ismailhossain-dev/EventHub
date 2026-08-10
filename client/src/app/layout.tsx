@@ -30,7 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={`${lustria.className}  h-full antialiased`}>
       <NextAuthProvider>
         <body className="min-h-full flex flex-col">
-          <main>{children}</main>
+          <main className="">{children}</main>
           <ToastContainer />
         </body>
       </NextAuthProvider>
