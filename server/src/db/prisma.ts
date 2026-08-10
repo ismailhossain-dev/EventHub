@@ -12,7 +12,7 @@ const adapter = new PrismaPg({
 export const prisma = new PrismaClient({
   adapter,
 });
-// 
+// database connect
 
 export const initDB = async () => {
   try {

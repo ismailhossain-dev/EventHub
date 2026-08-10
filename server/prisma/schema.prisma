@@ -1,12 +1,9 @@
 // This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// learn more about it in the docs:
+// https://pris.ly/d/prisma-schema
 
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
-//amader eta nerate korte hobe src vitor
 generator client {
   provider = "prisma-client"
-  // ekane bole deya hoiche generated/prisma ta kothay jenarate hobe
   output   = "../src/generated/prisma"
 }
 
@@ -14,12 +11,18 @@ datasource db {
   provider = "postgresql"
 }
 
+// =========================
+// ENUM
+// =========================
+
 enum Role {
   USER
   ADMIN
 }
 
-// user prisma
+// =========================
+// USER MODEL
+// =========================
 
 model User {
   id        String   @id @default(cuid())
@@ -30,10 +33,11 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  reviews Review[]
+
   @@map("users")
 }
 
-// product json 
 model Room {
   id           String   @id @default(cuid())
   image        String
@@ -49,8 +53,25 @@ model Room {
   size         String
   amenities    String[]
   availability Boolean
-
   phone        String
   isDeleted    Boolean  @default(false)
   createdAt    DateTime @default(now())
+
+  reviews Review[]
+}
+
+model Review {
+  id         String  @id @default(cuid())
+  rating     Int
+  comment    String
+  isApproved Boolean @default(true)
+
+  userId String
+  roomId String
+
+  user User @relation(fields: [userId], references: [id])
+  room Room @relation(fields: [roomId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

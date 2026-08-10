@@ -1,7 +1,8 @@
 // file-2 user  rq res handle
 import { type Request, type Response } from "express";
 import { userService } from "./user.service.js";
-
+import bcrypt from "bcryptjs";
+import { prisma } from "../../db/prisma.js";
 const createUser = async (req: Request, res: Response) => {
   try {
     const user = await userService.createUser(req.body);
@@ -87,9 +88,70 @@ const getUserByEmail = async (req: Request, res: Response) => {
   }
 };
 
+// ==========================================
+// Login User
+// ==========================================
+const loginUser = async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body;
+
+    // Validation
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Email and password are required",
+      });
+    }
+
+    // Find user
+    const user = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid email or password",
+      });
+    }
+
+    // Compare password
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      user.password
+    );
+
+    if (!isPasswordValid) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid email or password",
+      });
+    }
+
+    // Remove password
+    const { password: _, ...userData } = user;
+
+    return res.status(200).json({
+      success: true,
+      message: "Login successful",
+      data: userData,
+    });
+  } catch (error) {
+    console.error("Login error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+    });
+  }
+};
+
 
 export const userController = {
   createUser,
   deleteUser,
-  getUserByEmail
+  getUserByEmail,
+  loginUser,
 };

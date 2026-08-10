@@ -18,3 +18,8 @@ export const userDeleteRoutes = router;
 
 router.get("/", userController.getUserByEmail);
 export const getSIngleUser = router; 
+
+// login user authentication nextauth step-2
+router.post("/login", userController.loginUser);
+
+export const nextAuthRoutes = router; 
