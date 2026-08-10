@@ -1,9 +1,19 @@
-import React from 'react'
+"use client";
 
-function layout() {
-  return (
-    <div>layout</div>
-  )
+import DashboardWrapper from "@/components/UserDashboard/shared/DashboardWrapper/DashboardWrapper";
+import React from "react";
+
+interface childrenProms {
+  children? :React.ReactNode 
 }
 
-export default layout
+const Layout = ({ children }: childrenProms) => {
+
+  return (
+   <DashboardWrapper>
+    {children}
+   </DashboardWrapper>
+  );
+};
+
+export default Layout;

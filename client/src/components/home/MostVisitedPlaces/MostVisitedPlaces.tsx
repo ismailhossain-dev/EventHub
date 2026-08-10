@@ -8,7 +8,7 @@ const placesData = [
     id: 1,
     title: "Texas",
     image:
-      "https://images.unsplash.com/photo-1531219436234-97593c1533fb?q=80&w=1000&auto=format&fit=crop",
+      "https://res.cloudinary.com/ddfgi0gdr/image/upload/v1786345076/img_vmgwwx.avif",
     size: "col-span-1 lg:col-span-7 row-span-2", // বড় কার্ড
     height: "h-[300px] lg:h-[480px]",
   },

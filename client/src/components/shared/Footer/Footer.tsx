@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp, MapPin, Mail, Phone } from 'lucide-react';
 import Logo from '../Logo/Logo';
 
 export default function Footer() {
@@ -26,20 +26,7 @@ export default function Footer() {
               EventHub simplifies event planning, ticket booking, and unforgettable gatherings with verified venues, secure transactions, and expert support making your experience easy and stress-free.
             </p>
 
-            <div className="space-y-2 text-sm text-[#cbd5e1] pt-2">
-              <p className="flex items-center gap-2">
-                <span className="font-semibold text-white">Location:</span> Rangamati, Bangladesh
-              </p>
-              <p className="flex items-center gap-2">
-                <span className="font-semibold text-white">Email:</span> 
-                <a href="mailto:touhidcodes@gmail.com" className="hover:text-blue-400 transition-colors">
-                  ismail.dev@gmail.com
-                </a>
-              </p>
-              <p className="flex items-center gap-2">
-                <span className="font-semibold text-white">Phone:</span> +880 1619408991
-              </p>
-            </div>
+         
 
             {/* Social Icons & Back to Top */}
             <div className="flex items-center justify-between pt-4 max-w-md">
@@ -81,13 +68,26 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Legal Column (Span 3) */}
+          {/* Connect Information Column (Span 3) */}
           <div className="lg:col-span-3 flex flex-col space-y-4">
-            <h3 className="text-white font-bold text-base uppercase tracking-wider">Legal</h3>
-            <ul className="flex flex-col space-y-2.5 text-sm text-[#cbd5e1]">
-              <li><Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="hover:text-white transition-colors">Terms of Services</Link></li>
-              <li><Link href="/cookie-policy" className="hover:text-white transition-colors">Cookie Policy</Link></li>
+            <h3 className="text-white font-bold text-base uppercase tracking-wider">Connect Info</h3>
+            <ul className="flex flex-col space-y-3 text-sm text-[#cbd5e1]">
+              <li className="flex items-start gap-3">
+                <MapPin size={18} className="text-[#ff2e63] shrink-0 mt-0.5" />
+                <span>Rangamati, Chittagong Division, Bangladesh</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Mail size={18} className="text-[#ff2e63] shrink-0" />
+                <a href="mailto:ismail.dev@gmail.com" className="hover:text-white transition-colors">
+                  ismail.dev@gmail.com
+                </a>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone size={18} className="text-[#ff2e63] shrink-0" />
+                <a href="tel:+8801619408991" className="hover:text-white transition-colors">
+                  +880 1619408991
+                </a>
+              </li>
             </ul>
           </div>
 

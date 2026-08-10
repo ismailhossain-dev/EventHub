@@ -82,7 +82,7 @@ const RoomDetailsPage = async ({ params }: RoomDetailsPageProps) => {
                   src={image || '/assets/hero.avif'} 
                   alt={title || 'Room Image'} 
                   fill 
-                  priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider border border-white/20">
