@@ -75,12 +75,9 @@ export default function Footer() {
           <div className="lg:col-span-3 flex flex-col space-y-4">
             <h3 className="text-white font-bold text-base uppercase tracking-wider">Quick Links</h3>
             <ul className="flex flex-col space-y-2.5 text-sm text-[#cbd5e1]">
-              <li><Link href="/" className="hover:text-white transition-colors">Homepage</Link></li>
-              <li><Link href="/events" className="hover:text-white transition-colors">Events</Link></li>
-              <li><Link href="/services" className="hover:text-white transition-colors">Services</Link></li>
-              <li><Link href="/blogs" className="hover:text-white transition-colors">Blogs</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors">Contact Me</Link></li>
-              <li><Link href="/login" className="hover:text-white transition-colors">Login</Link></li>
+              <li><Link href="/" className="hover:text-white transition-colors">HOME</Link></li>
+              <li><Link href="/all-events" className="hover:text-white transition-colors">EVENTS</Link></li>
+              <li><Link href="/about" className="hover:text-white transition-colors">ABOUT US</Link></li>
             </ul>
           </div>
 

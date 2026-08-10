@@ -14,9 +14,9 @@ export default function Navbar() {
   const navLinks = [
     { name: 'HOME', path: '/' },
     { name: 'EVENTS', path: '/all-events' },
-    { name: 'NEWS', path: '/news' },
+    // { name: 'NEWS', path: '/news' },
     { name: 'ABOUT US', path: '/about' },
-    { name: 'DASHBOARD', path: '/dashboard' },
+    { name: 'DASHBOARD', path: '/user' },
   ];
 
   return (

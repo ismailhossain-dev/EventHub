@@ -1,3 +1,4 @@
+import FeaturedRooms from "@/components/home/FeaturedRooms/FeaturedRooms";
 import Hero from "@/components/home/Hero/Hero";
 import PopularCategories from "@/components/home/PopularCategories/PopularCategories";
 import HomeRooms from "@/components/room/HomeRooms/HomeRooms";
@@ -27,7 +28,8 @@ export default async function Home() {
    <div>
     <Navbar/>
     <Hero/>
-    {/* <PopularCategories/> */}
+    <PopularCategories/>
+    <FeaturedRooms/>
     <HomeRooms rooms ={rooms}></HomeRooms>
     <Footer/>
    </div>
