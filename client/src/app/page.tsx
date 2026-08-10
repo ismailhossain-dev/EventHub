@@ -1,5 +1,6 @@
 import FeaturedRooms from "@/components/home/FeaturedRooms/FeaturedRooms";
 import Hero from "@/components/home/Hero/Hero";
+import MostVisitedPlaces from "@/components/home/MostVisitedPlaces/MostVisitedPlaces";
 import PopularCategories from "@/components/home/PopularCategories/PopularCategories";
 import HomeRooms from "@/components/room/HomeRooms/HomeRooms";
 import Footer from "@/components/shared/Footer/Footer";
@@ -31,6 +32,8 @@ export default async function Home() {
     <PopularCategories/>
     <FeaturedRooms/>
     <HomeRooms rooms ={rooms}></HomeRooms>
+
+    <MostVisitedPlaces/>
     <Footer/>
    </div>
   );
