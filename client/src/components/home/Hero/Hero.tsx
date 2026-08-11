@@ -1,133 +1,65 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
-import { Search, Calendar, Grid, Clock } from "lucide-react";
+import Link from "next/link";
+import React from "react";
+import { Sparkles, Compass, ArrowRight, Info } from "lucide-react";
 
 const Hero = () => {
-  // Default demo values state (matching your navbar/footer theme)
-  const [searchTerm, setSearchTerm] = useState("Music Concert");
-  const [purpose, setPurpose] = useState("Entertainment");
-  const [location, setLocation] = useState("Jashore");
-
-  // Search click handler
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log({
-      searchTerm,
-      purpose,
-      location,
-    });
-    alert(
-      `Searching for: "${searchTerm}" | Purpose: ${purpose} | Location: ${location}`,
-    );
-  };
-
   return (
-    <div className="relative w-full h-[550px] flex items-center justify-center font-sans">
+    <div className="relative w-full h-[600px] flex items-center justify-center font-sans overflow-hidden">
       {/* Background Image with Dark Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/assets/hero.avif"
           alt="hero-img"
           fill
+          priority
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="w-full h-full object-cover brightness-[0.45]"
+          className="w-full h-full object-cover brightness-[0.4] scale-105 transition-transform duration-1000 ease-out"
         />
+        {/* Subtle Gradient Overlays for Depth */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-950/40 via-transparent to-indigo-950/40" />
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 w-full flex flex-col items-center text-center text-white mt-[-40px]">
+      <div className="relative z-10 max-w-4xl mx-auto px-4 w-full flex flex-col items-center text-center text-white">
+        
+        {/* Floating Badge */}
+        <div className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 border border-white/20 px-4 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md transition-all mb-6 shadow-lg shadow-black/10 animate-fade-in">
+          <Sparkles size={14} className="text-amber-400 animate-pulse" />
+          <span className="tracking-wide">Discover Extraordinary Experiences</span>
+        </div>
+
         {/* Heading & Subtitle */}
-        <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-3">
-          Find Nearby Location
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-4 leading-[1.15]">
+          Find Your Next <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-sky-200">Adventure</span> Nearby
         </h1>
-        <p className="text-gray-300 text-sm md:text-base mb-8 max-w-lg">
-          Explore top-rated attractions, activities and more!
+        <p className="text-slate-300 text-sm sm:text-base md:text-lg mb-8 max-w-xl font-normal leading-relaxed">
+          Explore top-rated attractions, hidden gems, cultural hotspots, and unforgettable activities around you.
         </p>
 
-        {/* Search Bar Form (Matched with reference screenshot design: Left dark label block + pill/rounded wrapper + dark search button) */}
-        {/* <form
-          onSubmit={handleSearch}
-          className="w-full bg-white text-black rounded-2xl lg:rounded-full p-2 shadow-2xl flex flex-col lg:flex-row items-center gap-2"
-        >
+        {/* Action Buttons with Links */}
+        <div className="flex flex-wrap items-center justify-center gap-3.5">
+          <Link
+            href="/all-events"
+            className="flex items-center gap-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-7 py-3.5 rounded-2xl shadow-xl shadow-blue-600/30 transition-all text-xs sm:text-sm tracking-wide cursor-pointer group"
+          >
+            <Compass size={16} className="group-hover:rotate-45 transition-transform duration-300" />
+            All Events
+            <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
           
-          <div className="w-full lg:w-auto bg-[#121c24] text-white px-6 py-3.5 rounded-xl lg:rounded-l-full font-bold text-sm tracking-wide shrink-0 text-center lg:text-left">
-            Property Search
-          </div>
-          <div className="flex items-center gap-2 px-4 py-3 w-full lg:flex-1 lg:border-l border-gray-200">
-            <Search size={18} className="text-gray-400 shrink-0" />
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search for properties..."
-              className="w-full bg-transparent text-sm focus:outline-none placeholder-gray-400 text-gray-700"
-            />
-          </div>
-
-          <div className="w-full lg:w-45 px-4 py-3 lg:border-l border-gray-200 text-sm text-gray-600 flex items-center justify-between">
-            <select
-              value={purpose}
-              onChange={(e) => setPurpose(e.target.value)}
-              className="w-full bg-transparent focus:outline-none cursor-pointer text-gray-700 truncate"
-            >
-              <option value="Entertainment">Entertainment</option>
-              <option value="Residential">Residential</option>
-              <option value="Commercial">Commercial</option>
-              <option value="Event Venue">Event Venue</option>
-            </select>
-          </div>
-
-          <div className="w-full lg:w-[180px] px-4 py-3 lg:border-l border-gray-200 text-sm text-gray-600 flex items-center justify-between">
-            <select
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              className="w-full bg-transparent focus:outline-none cursor-pointer text-gray-700 truncate"
-            >
-              <option value="Jashore">Jashore</option>
-              <option value="Dhaka">Dhaka</option>
-              <option value="Chittagong">Chittagong</option>
-              <option value="Sylhet">Sylhet</option>
-            </select>
-          </div>
-
-
-          <button
-            type="submit"
-            className="w-full lg:w-auto bg-[#121c24] hover:bg-[#1e293b] text-white font-semibold px-7 py-3.5 rounded-xl lg:rounded-r-full transition-all text-sm tracking-wide shrink-0 flex items-center justify-center gap-2 shadow-md cursor-pointer"
+          <Link
+            href="/about"
+            className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-7 py-3.5 rounded-2xl border border-white/20 backdrop-blur-md transition-all text-xs sm:text-sm tracking-wide cursor-pointer shadow-lg shadow-black/10"
           >
-            <Search size={16} /> Search Property
-          </button>
-        </form> */}
+            <Info size={16} />
+            About Us
+          </Link>
+        </div>
 
-        {/* Filter Pills Below Search Bar
-        <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
-          <span className="text-xs text-gray-300 font-medium">
-            Or browse event by feature:
-          </span>
-
-          <button
-            onClick={() => alert("Upcoming Events clicked!")}
-            className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2 rounded-full text-xs font-semibold backdrop-blur-md transition-all cursor-pointer"
-          >
-            <Calendar size={14} className="text-pink-400" /> Upcoming Events
-          </button>
-
-          <button
-            onClick={() => alert("Featured Events clicked!")}
-            className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2 rounded-full text-xs font-semibold backdrop-blur-md transition-all cursor-pointer"
-          >
-            <Clock size={14} className="text-yellow-400" /> Featured Events
-          </button>
-
-          <button
-            onClick={() => alert("All Events clicked!")}
-            className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2 rounded-full text-xs font-semibold backdrop-blur-md transition-all cursor-pointer"
-          >
-            <Grid size={14} className="text-blue-400" /> All Events
-          </button>
-        </div> */}
       </div>
     </div>
   );
