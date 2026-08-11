@@ -18,3 +18,19 @@ export interface Room {
     createdAt: string
 }
 
+export interface Booking {
+  id: string;
+  userId: string;
+  roomId: string;
+  roomTitle: string;
+  roomImage: string;
+  price: number;
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  message?: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+}

@@ -125,11 +125,11 @@ export default function Navbar() {
 
                     <div className="my-1 border-t border-gray-100" />
 
-                    {/* Logout Option */}
+                    {/* Logout Option - Fixed with callbackUrl */}
                     <button
                       onClick={() => {
                         setIsProfileDropdownOpen(false);
-                        signOut();
+                        signOut({ callbackUrl: '/login' });
                       }}
                       className="w-full flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer text-left"
                     >
@@ -166,7 +166,7 @@ export default function Navbar() {
                   )}
                 </button>
 
-                {/* Mobile Dropdown Menu (Same as Desktop Style) */}
+                {/* Mobile Dropdown Menu */}
                 {isProfileDropdownOpen && (
                   <div className="absolute right-0 mt-3 w-60 bg-white text-gray-800 border border-gray-100 rounded-2xl shadow-2xl py-2 z-50 animate-in fade-in zoom-in-95 duration-150">
                     
@@ -198,11 +198,11 @@ export default function Navbar() {
 
                     <div className="my-1 border-t border-gray-100" />
 
-                    {/* Logout Option */}
+                    {/* Logout Option - Fixed with callbackUrl */}
                     <button
                       onClick={() => {
                         setIsProfileDropdownOpen(false);
-                        signOut();
+                        signOut({ callbackUrl: '/login' });
                       }}
                       className="w-full flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer text-left"
                     >
@@ -278,7 +278,7 @@ export default function Navbar() {
               <button
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  signOut();
+                  signOut({ callbackUrl: '/login' });
                 }}
                 className="w-full flex items-center justify-center gap-2 py-3 text-xs font-bold uppercase tracking-wider text-white border border-red-500/50 bg-red-500/10 rounded-full hover:bg-red-500/20 transition-colors cursor-pointer"
               >

@@ -20,7 +20,38 @@ const createBooking = async (req: Request, res: Response) => {
     });
   }
 };
+// get booking data
+const getBookingsByEmail = async (
+  req: Request<{ email: string }>,
+  res: Response
+) => {
+  try {
+    const { email } = req.params;
+      console.log("🔍 Searching booking by email:", email);
+
+    const bookings =
+      await bookingService.getBookingsByEmail(email);
+
+    return res.status(200).json({
+      success: true,
+      message: "Bookings fetched successfully",
+      data: bookings,
+    });
+  } catch (error) {
+    console.error("Get bookings error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch bookings",
+      error:
+        error instanceof Error
+          ? error.message
+          : "Unknown error",
+    });
+  }
+};
 
 export const bookingController = {
   createBooking,
+  getBookingsByEmail
 };

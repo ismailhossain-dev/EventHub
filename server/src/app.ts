@@ -3,7 +3,7 @@ import express, { type Application } from "express"
 import {  getSIngleUser, nextAuthRoutes, userDeleteRoutes, useRoutes } from "./modules/user/user.route.js"
 import { detailsRoutes, roomsHomeRoutes, useRoomRoutes } from "./modules/room/room.route.js"
 import cors from "cors"
-import { bookingRoutes } from "./modules/booking/booking.route.js"
+import { bookingRoutes, getBookingRoutes } from "./modules/booking/booking.route.js"
 
 const app:Application = express()
 app.use(
@@ -40,5 +40,7 @@ app.use("/api/rooms", detailsRoutes);
 
 //=========== booking routes post============
 app.use("/api/bookings", bookingRoutes);
+// get booking
+app.use("/api/bookings", getBookingRoutes);
 //app ta amra server.ts file chalai
 export default app;

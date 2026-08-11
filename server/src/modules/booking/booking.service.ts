@@ -25,6 +25,21 @@ const createBookingIntoDB = async (data: ICreateBooking) => {
   return result;
 };
 
+
+
+// Get bookings by user
+const getBookingsByEmail = async (email: string) => {
+    console.log("hello email", email);
+    const bookings = await prisma.booking.findMany({
+    where: {
+      email: email,
+    },
+  });
+
+  return bookings;
+};
+
 export const bookingService = {
   createBookingIntoDB,
+  getBookingsByEmail
 };
