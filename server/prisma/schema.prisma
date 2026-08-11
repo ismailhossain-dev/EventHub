@@ -1,7 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs:
-// https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -11,35 +7,22 @@ datasource db {
   provider = "postgresql"
 }
 
-// =========================
-// ENUM
-// =========================
-
-enum Role {
-  USER
-  ADMIN
-}
-
-// =========================
-// USER MODEL
-// =========================
-
 model User {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   name      String
-  email     String   @unique
+  email     String    @unique
   password  String
-  role      Role     @default(USER)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  reviews Review[]
+  role      Role      @default(USER)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  reviews   Review[]
+  bookings  Booking[]
 
   @@map("users")
 }
 
 model Room {
-  id           String   @id @default(cuid())
+  id           String    @id @default(cuid())
   image        String
   title        String
   roomNumber   String
@@ -53,25 +36,59 @@ model Room {
   size         String
   amenities    String[]
   availability Boolean
+  isDeleted    Boolean   @default(false)
+  createdAt    DateTime  @default(now())
   phone        String
-  isDeleted    Boolean  @default(false)
-  createdAt    DateTime @default(now())
-
-  reviews Review[]
+  reviews      Review[]
+  bookings     Booking[]
 }
 
 model Review {
-  id         String  @id @default(cuid())
+  id         String   @id @default(cuid())
   rating     Int
   comment    String
-  isApproved Boolean @default(true)
+  isApproved Boolean  @default(true)
+  userId     String
+  roomId     String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  room       Room     @relation(fields: [roomId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model Booking {
+  id String @id @default(cuid())
 
   userId String
   roomId String
 
-  user User @relation(fields: [userId], references: [id])
-  room Room @relation(fields: [roomId], references: [id])
+  roomTitle String
+  roomImage String
+  price     Int
+
+  name    String
+  email   String
+  phone   String
+  address String
+  message String?
+
+  status BookingStatus @default(PENDING)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+  room Room @relation(fields: [roomId], references: [id])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
 }

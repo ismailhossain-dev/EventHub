@@ -103,7 +103,7 @@ export default function Navbar() {
 
                     {/* Links */}
                     <Link
-                      href="/dashboard/booking"
+                      href="/user/booking"
                       onClick={() => setIsProfileDropdownOpen(false)}
                       className="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-gray-700 hover:bg-gray-100 transition-colors"
                     >
@@ -112,7 +112,7 @@ export default function Navbar() {
                     </Link>
 
                     <Link
-                      href="/dashboard/profile"
+                      href="/user/profile"
                       onClick={() => setIsProfileDropdownOpen(false)}
                       className="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-gray-700 hover:bg-gray-100 transition-colors"
                     >
@@ -121,7 +121,7 @@ export default function Navbar() {
                     </Link>
 
                     <Link
-                      href="/dashboard/wishlist"
+                      href="/user/wishlist"
                       onClick={() => setIsProfileDropdownOpen(false)}
                       className="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-gray-700 hover:bg-gray-100 transition-colors"
                     >
@@ -160,7 +160,7 @@ export default function Navbar() {
           <div className="lg:hidden flex items-center gap-3">
             {session?.user && (
               <Link
-                href="/dashboard/profile"
+                href="/user/profile"
                 className="relative w-9 h-9 rounded-full overflow-hidden border-2 border-[#ff2e63] bg-[#1e293b] flex items-center justify-center shadow-sm"
               >
                 {session.user.image ? (
@@ -251,7 +251,7 @@ export default function Navbar() {
               <>
                 <div className="pt-2 pb-1 text-[10px] font-bold tracking-widest uppercase text-gray-500">Dashboard Quick Links</div>
                 <Link
-                  href="/dashboard/booking"
+                  href="/user/booking"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-gray-300 hover:bg-white/5 hover:text-white"
                 >
@@ -259,7 +259,7 @@ export default function Navbar() {
                   <CalendarCheck size={16} className="text-[#ff2e63]" />
                 </Link>
                 <Link
-                  href="/dashboard/profile"
+                  href="/user/profile"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-gray-300 hover:bg-white/5 hover:text-white"
                 >
@@ -267,7 +267,7 @@ export default function Navbar() {
                   <User size={16} className="text-[#ff2e63]" />
                 </Link>
                 <Link
-                  href="/dashboard/wishlist"
+                  href="/user/wishlist"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-gray-300 hover:bg-white/5 hover:text-white"
                 >

@@ -14,22 +14,22 @@ import { signOut } from 'next-auth/react';
 const sidebarLinks = [
   {
     name: 'Overview',
-    href: '/dashboard',
+    href: '/user',
     icon: <LayoutDashboard size={20} />,
   },
   {
     name: 'Reviews',
-    href: '/dashboard/reviews',
+    href: '/user/my-reviews',
     icon: <Star size={20} />,
   },
   {
     name: 'Booking',
-    href: '/dashboard/booking',
+    href: '/user/my-booking',
     icon: <CalendarCheck size={20} />,
   },
   {
     name: 'Profile',
-    href: '/dashboard/profile',
+    href: '/user/my-profile',
     icon: <User size={20} />,
   },
 ];
