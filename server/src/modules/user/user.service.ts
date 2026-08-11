@@ -1,5 +1,5 @@
 import { prisma } from "../../db/prisma.js";
-import bcrypt from "bcryptjs";
+// import bcrypt from "bcryptjs";
 interface Iuser {
     name: string,
     email: string,
@@ -23,15 +23,12 @@ const createUser = async (data: {
     throw new Error("User already exists");
   }
 
-  // Hash password
-  const hashedPassword = await bcrypt.hash(data.password, 10);
-
   // Create user
   const user = await prisma.user.create({
     data: {
       name: data.name,
       email: data.email,
-      password: hashedPassword,
+      password: data.password,
       role: "USER",
     },
   });
@@ -41,7 +38,6 @@ const createUser = async (data: {
 
   return userData;
 };
-
 
 //Delete user
 const deleteUser = async (email: string) => {

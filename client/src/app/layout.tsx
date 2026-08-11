@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Lustria } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import NextAuthProvider from "@/provider/NextAuthProvider";
+import QueryProvider from "@/provider/QueryProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,12 +29,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${lustria.className}  h-full antialiased`}>
+      <QueryProvider>
       <NextAuthProvider>
         <body className="min-h-full flex flex-col">
           <main className="">{children}</main>
           <ToastContainer />
         </body>
       </NextAuthProvider>
+      </QueryProvider>
     </html>
   );
 }

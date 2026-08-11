@@ -1,8 +1,11 @@
+import Profile from '@/components/UserDashboard/Profile/Profile'
 import React from 'react'
 
 function RootProfile() {
   return (
-    <div>RootProfile</div>
+    <div>
+    <Profile></Profile>
+    </div>
   )
 }
 

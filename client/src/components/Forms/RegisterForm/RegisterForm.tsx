@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import Container from "@/components/shared/Container/Container";
 import useAxiosSecure from "@/hook/useAxiosSecure";
-import bcrypt from "bcryptjs";
+// import bcrypt from "bcryptjs";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 const RegisterForm = () => {
@@ -37,11 +37,12 @@ const handleSubmit = async (e: React.FormEvent) => {
     return;
   }
 
-  const hashedPassword = await bcrypt.hash(password, 10);
+  // const hashedPassword = await bcrypt.hash(password, 10);
   const userData = {
     name,
     email,
-      password: hashedPassword,//password convert hash
+      // password: hashedPassword,//password convert hash
+      password
   };
 
   try {

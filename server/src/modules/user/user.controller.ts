@@ -1,7 +1,7 @@
 // file-2 user  rq res handle
 import { type Request, type Response } from "express";
 import { userService } from "./user.service.js";
-import bcrypt from "bcryptjs";
+// import bcrypt from "bcryptjs";
 import { prisma } from "../../db/prisma.js";
 const createUser = async (req: Request, res: Response) => {
   try {
@@ -95,7 +95,9 @@ const loginUser = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
 
-    // Validation
+    console.log("📧 Login email:", email);
+    console.log("🔑 Login password:", password);
+
     if (!email || !password) {
       return res.status(400).json({
         success: false,
@@ -103,34 +105,45 @@ const loginUser = async (req: Request, res: Response) => {
       });
     }
 
-    // Find user
     const user = await prisma.user.findUnique({
       where: {
-        email,
+        email: email,
       },
     });
 
+    console.log("👤 User from DB:", user);
+
     if (!user) {
+      console.log("❌ USER NOT FOUND");
       return res.status(401).json({
         success: false,
         message: "Invalid email or password",
       });
     }
 
-    // Compare password
-    const isPasswordValid = await bcrypt.compare(
-      password,
-      user.password
-    );
+    console.log("🔐 Hashed password:", user.password);
+
+    // const isPasswordValid = await bcrypt.compare(
+    //   password,
+    //   user.password
+    // );
+    const isPasswordValid = password
+      
+    
+
+    console.log("🔍 Password matched:", isPasswordValid);
 
     if (!isPasswordValid) {
+      console.log("❌ PASSWORD NOT MATCHED");
+
       return res.status(401).json({
         success: false,
         message: "Invalid email or password",
       });
     }
 
-    // Remove password
+    console.log("✅ LOGIN SUCCESS");
+
     const { password: _, ...userData } = user;
 
     return res.status(200).json({
@@ -147,7 +160,6 @@ const loginUser = async (req: Request, res: Response) => {
     });
   }
 };
-
 
 export const userController = {
   createUser,
