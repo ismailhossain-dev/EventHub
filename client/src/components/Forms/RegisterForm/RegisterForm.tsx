@@ -12,50 +12,55 @@ import {
   Eye,
   EyeOff,
   ArrowLeft,
+  Loader2,
 } from "lucide-react";
 import Container from "@/components/shared/Container/Container";
 import useAxiosSecure from "@/hook/useAxiosSecure";
-// import bcrypt from "bcryptjs";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+
 const RegisterForm = () => {
-  // State for registration inputs and password visibility
+  // State for registration inputs, visibility, and loading
   const [name, setName] = useState("ismailcodes");
   const [email, setEmail] = useState("ismailcodes@gmail.com");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
- const axiosSecure = useAxiosSecure();
-const router = useRouter()
-const handleSubmit = async (e: React.FormEvent) => {
-  
-  e.preventDefault();
+  const [isLoading, setIsLoading] = useState(false); // Loading state added
 
-  if (password !== confirmPassword) {
-    alert("Passwords do not match!");
-    return;
-  }
+  const axiosSecure = useAxiosSecure();
+  const router = useRouter();
 
-  // const hashedPassword = await bcrypt.hash(password, 10);
-  const userData = {
-    name,
-    email,
-      // password: hashedPassword,//password convert hash
-      password
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      toast.warn("Passwords do not match!");
+      return;
+    }
+
+    setIsLoading(true);
+
+    const userData = {
+      name,
+      email,
+      password,
+    };
+
+    try {
+      const res = await axiosSecure.post("/api/users", userData);
+
+      console.log("User created:", res.data);
+
+      toast.success(`Account created successfully for: ${name} (${email})`);
+      router.push("/login");
+    } catch (error: any) {
+      console.log("Registration error:", error);
+      toast.error(error?.response?.data?.message || "Registration failed!");
+      setIsLoading(false); // Stop loading on error
+    }
   };
-
-  try {
-    const res = await axiosSecure.post("/api/users", userData);
-
-    console.log("User created:", res.data);
-
-    toast.success(`Account created successfully for: ${name} (${email})`);
-    router.push("/login")
-  } catch (error: any) {
-    console.log("Registration error:", error);
-  }
-};
 
   return (
     <div className="min-h-screen w-full bg-gray-50 flex flex-col justify-center py-8 px-4 font-sans">
@@ -135,7 +140,8 @@ const handleSubmit = async (e: React.FormEvent) => {
                     onChange={(e) => setName(e.target.value)}
                     placeholder="ismailcodes"
                     required
-                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-3 pl-12 pr-4 text-sm text-gray-800 focus:outline-none focus:border-[#ff2e63] focus:bg-white transition-all"
+                    disabled={isLoading}
+                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-3 pl-12 pr-4 text-sm text-gray-800 focus:outline-none focus:border-[#ff2e63] focus:bg-white transition-all disabled:opacity-70"
                   />
                 </div>
               </div>
@@ -153,7 +159,8 @@ const handleSubmit = async (e: React.FormEvent) => {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="ismailcodes@gmail.com"
                     required
-                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-3 pl-12 pr-4 text-sm text-gray-800 focus:outline-none focus:border-[#ff2e63] focus:bg-white transition-all"
+                    disabled={isLoading}
+                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-3 pl-12 pr-4 text-sm text-gray-800 focus:outline-none focus:border-[#ff2e63] focus:bg-white transition-all disabled:opacity-70"
                   />
                 </div>
               </div>
@@ -171,7 +178,8 @@ const handleSubmit = async (e: React.FormEvent) => {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
                     required
-                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-3 pl-12 pr-12 text-sm text-gray-800 focus:outline-none focus:border-[#ff2e63] focus:bg-white transition-all"
+                    disabled={isLoading}
+                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-3 pl-12 pr-12 text-sm text-gray-800 focus:outline-none focus:border-[#ff2e63] focus:bg-white transition-all disabled:opacity-70"
                   />
                   <button
                     type="button"
@@ -196,7 +204,8 @@ const handleSubmit = async (e: React.FormEvent) => {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="••••••••"
                     required
-                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-3 pl-12 pr-12 text-sm text-gray-800 focus:outline-none focus:border-[#ff2e63] focus:bg-white transition-all"
+                    disabled={isLoading}
+                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-3 pl-12 pr-12 text-sm text-gray-800 focus:outline-none focus:border-[#ff2e63] focus:bg-white transition-all disabled:opacity-70"
                   />
                   <button
                     type="button"
@@ -212,12 +221,21 @@ const handleSubmit = async (e: React.FormEvent) => {
                 </div>
               </div>
 
-              {/* Submit Button */}
+              {/* Submit Button with Loading State */}
               <button
                 type="submit"
-                className="w-full bg-[#ff2e63] hover:bg-[#e02454] text-white font-bold py-3.5 rounded-2xl transition-all shadow-lg shadow-pink-500/20 text-sm uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer mt-2"
+                disabled={isLoading}
+                className="w-full bg-[#ff2e63] hover:bg-[#e02454] text-white font-bold py-3.5 rounded-2xl transition-all shadow-lg shadow-pink-500/20 text-sm uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                Sign Up <ArrowRight size={16} />
+                {isLoading ? (
+                  <>
+                    <Loader2 size={18} className="animate-spin" /> Creating Account...
+                  </>
+                ) : (
+                  <>
+                    Sign Up <ArrowRight size={16} />
+                  </>
+                )}
               </button>
             </form>
 

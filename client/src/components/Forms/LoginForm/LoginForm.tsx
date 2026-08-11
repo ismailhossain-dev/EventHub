@@ -11,40 +11,50 @@ import {
   Eye,
   EyeOff,
   ArrowLeft,
+  Loader2,
 } from "lucide-react";
 import Container from "@/components/shared/Container/Container";
 import { toast } from "react-toastify";
 import { signIn } from "next-auth/react";
 
 const LoginForm = () => {
-  // State for form inputs and password visibility
+  // State for form inputs and loading/visibility
   const [email, setEmail] = useState("ismailcodes@gmail.com");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Loading state added
 
-  // Form submit handler to show console values
-  const handleSubmit = async(e: React.FormEvent) => {
+  // Form submit handler to show console values and handle loading
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Login Form Data Submitted:", {
-      email,
-      password,
-      rememberMe,
-    });
-     const result = await signIn("credentials", {
-    email,
-    password,
-    redirect: false,
-  });
+    setIsLoading(true);
 
-  if (result?.error) {
-    alert("Invalid email or password");
-    return;
-  }
+    try {
+      console.log("Login Form Data Submitted:", {
+        email,
+        password,
+        rememberMe,
+      });
 
-  toast.success("Login successful!");
+      const result = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
 
-  window.location.href = "/";
+      if (result?.error) {
+        toast.warn("Invalid email or password");
+        setIsLoading(false); // Stop loading on error
+        return;
+      }
+
+      toast.success("Login successful!");
+      window.location.href = "/";
+    } catch (error) {
+      toast.error("Something went wrong!");
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -125,7 +135,8 @@ const LoginForm = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="ismailcodes@gmail.com"
                     required
-                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-3.5 pl-12 pr-4 text-sm text-gray-800 focus:outline-none focus:border-[#ff2e63] focus:bg-white transition-all"
+                    disabled={isLoading}
+                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-3.5 pl-12 pr-4 text-sm text-gray-800 focus:outline-none focus:border-[#ff2e63] focus:bg-white transition-all disabled:opacity-70"
                   />
                 </div>
               </div>
@@ -151,7 +162,8 @@ const LoginForm = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
                     required
-                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-3.5 pl-12 pr-12 text-sm text-gray-800 focus:outline-none focus:border-[#ff2e63] focus:bg-white transition-all"
+                    disabled={isLoading}
+                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-3.5 pl-12 pr-12 text-sm text-gray-800 focus:outline-none focus:border-[#ff2e63] focus:bg-white transition-all disabled:opacity-70"
                   />
                   <button
                     type="button"
@@ -176,12 +188,21 @@ const LoginForm = () => {
                 </label>
               </div>
 
-              {/* Submit Button */}
+              {/* Submit Button with Loading State */}
               <button
                 type="submit"
-                className="w-full bg-[#ff2e63] hover:bg-[#e02454] text-white font-bold py-3.5 rounded-2xl transition-all shadow-lg shadow-pink-500/20 text-sm uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer"
+                disabled={isLoading}
+                className="w-full bg-[#ff2e63] hover:bg-[#e02454] text-white font-bold py-3.5 rounded-2xl transition-all shadow-lg shadow-pink-500/20 text-sm uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                Sign In <ArrowRight size={16} />
+                {isLoading ? (
+                  <>
+                    <Loader2 size={18} className="animate-spin" /> Signing In...
+                  </>
+                ) : (
+                  <>
+                    Sign In <ArrowRight size={16} />
+                  </>
+                )}
               </button>
             </form>
 

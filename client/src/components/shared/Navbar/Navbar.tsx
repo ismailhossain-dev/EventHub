@@ -46,7 +46,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className="w-full sticky top-0 z-50 bg-[#121c24] text-white shadow-md border-b border-white/10 font-sans">
+    <header className="w-full sticky top-0 z-50 bg-[#1c2d37] text-white shadow-md border-b border-white/10 font-sans">
       <Container>
         <div className="flex items-center justify-between h-20">
         

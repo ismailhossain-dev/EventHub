@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Star, User, Mail, MessageSquare } from 'lucide-react';
+import { toast } from 'react-toastify';
 
 export default function ReviewForm() {
   const [reviewData, setReviewData] = useState({
@@ -14,7 +15,7 @@ export default function ReviewForm() {
   const handleReviewSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("--- Review Form Data ---", reviewData);
-    alert("Review submitted successfully! Check console for data.");
+    toast.success("Review submitted successfully! Check console for data.");
     setReviewData({ name: '', email: '', rating: 5, message: '' });
   };
 
