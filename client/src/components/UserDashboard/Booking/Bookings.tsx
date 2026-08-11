@@ -28,7 +28,7 @@ export default function Bookings() {
         }
       } catch (error: any) {
         console.error("❌ Booking fetch error:", error?.response?.data || error);
-        toast.error("Failed to load your bookings.");
+        // toast.error("Failed to load your bookings.");
       }
     };
 

@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LogOut, Menu, X, ChevronRight, User, CalendarCheck, Heart } from 'lucide-react';
+import { LogOut, Menu, X, ChevronRight, User, CalendarCheck } from 'lucide-react';
 import Container from '../Container/Container';
 import Logo from '../Logo/Logo';
 import { useSession, signOut } from 'next-auth/react';
@@ -25,7 +25,6 @@ export default function Navbar() {
   const dashboardLinks = [
     { name: 'Booking', path: '/user/my-booking', icon: CalendarCheck },
     { name: 'Profile', path: '/user/my-profile', icon: User },
-    // { name: 'Wishlist', path: '/user/wishlist', icon: Heart },
   ];
 
   const { data: session, status } = useSession();
@@ -40,10 +39,6 @@ export default function Navbar() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
-  if (status === "loading") {
-    return <p className="text-white bg-[#121c24] p-4 text-center">Loading....</p>;
-  }
 
   return (
     <header className="w-full sticky top-0 z-50 bg-[#1c2d37] text-white shadow-md border-b border-white/10 font-sans">
@@ -76,7 +71,9 @@ export default function Navbar() {
             
             {/* Desktop Auth / Profile Section */}
             <div className="hidden lg:flex items-center relative">
-              {session?.user ? (
+              {status === "loading" ? (
+                <div className="w-10 h-10 rounded-full bg-[#1e293b] animate-pulse border border-white/10" />
+              ) : session?.user ? (
                 <div className="relative">
                   {/* Profile Avatar Trigger */}
                   <button
@@ -155,7 +152,9 @@ export default function Navbar() {
 
             {/* Mobile Profile Avatar & Dropdown */}
             <div className="lg:hidden flex items-center">
-              {session?.user && (
+              {status === "loading" ? (
+                <div className="w-9 h-9 rounded-full bg-[#1e293b] animate-pulse mr-2" />
+              ) : session?.user ? (
                 <div className="relative mr-2">
                   <button
                     onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
@@ -215,7 +214,7 @@ export default function Navbar() {
                     </div>
                   )}
                 </div>
-              )}
+              ) : null}
             </div>
 
             {/* Mobile Hamburger Toggle Button */}
@@ -280,7 +279,9 @@ export default function Navbar() {
           </div>
 
           <div className="mt-auto pt-4 border-t border-white/10">
-            {session?.user ? (
+            {status === "loading" ? (
+              <div className="w-full h-10 bg-white/5 animate-pulse rounded-full" />
+            ) : session?.user ? (
               <button
                 onClick={() => {
                   setIsMobileMenuOpen(false);

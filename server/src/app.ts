@@ -9,7 +9,7 @@ const app:Application = express()
 app.use(
   cors({
     // client cors
-    origin: "http://localhost:3000",
+    origin: "https://event-hub-mu-dusky.vercel.app" ,
     credentials: true,
   })
 );
