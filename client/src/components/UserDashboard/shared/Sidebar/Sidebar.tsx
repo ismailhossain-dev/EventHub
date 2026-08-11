@@ -18,21 +18,21 @@ const sidebarLinks = [
     href: '/user',
     icon: <LayoutDashboard size={20} />,
   },
-  {
-    name: 'Reviews',
-    href: '/user/my-reviews',
-    icon: <Star size={20} />,
-  },
+  // {
+  //   name: 'Reviews',
+  //   href: '/user/my-reviews',
+  //   icon: <Star size={20} />,
+  // },
   {
     name: 'Booking',
     href: '/user/my-booking',
     icon: <CalendarCheck size={20} />,
   },
-  {
-    name: 'Wishlist',
-    href: '/user/my-wishlist',
-    icon: <Heart size={20} />,
-  },
+  // {
+  //   name: 'Wishlist',
+  //   href: '/user/my-wishlist',
+  //   icon: <Heart size={20} />,
+  // },
   {
     name: 'Profile',
     href: '/user/my-profile',

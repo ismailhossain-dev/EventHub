@@ -92,7 +92,7 @@ export default function AboutPage() {
                     <ArrowRight size={16} />
                   </Link>
                   <Link 
-                    href="/login"
+                    href="/"
                     className="inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-gray-900 border border-gray-200 px-8 py-4 rounded-xl font-bold text-sm transition-all shadow-sm cursor-pointer"
                   >
                     Get Started

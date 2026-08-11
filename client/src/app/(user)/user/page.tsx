@@ -1,7 +1,4 @@
 "use client";
-
-import React from "react";
-import Link from "next/link";
 import {
   CalendarDays,
   Clock,
@@ -12,6 +9,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { OverviewChart } from "@/components/UserDashboard/chart/OverviewChart";
+import { useSession } from "next-auth/react";
 
 // --- MOCK DATA ---
 const userProfile = {
@@ -19,10 +17,10 @@ const userProfile = {
 };
 
 const statsData = [
-  { title: "Total Bookings", value: "8", icon: CalendarDays, helper: "All time reservations", href: "/bookings" },
-  { title: "Pending Bookings", value: "2", icon: Clock, helper: "Awaiting confirmation", href: "/bookings/pending" },
-  { title: "Completed Bookings", value: "5", icon: CheckCircle, helper: "Successfully finished stays", href: "/bookings/completed" },
-  { title: "Total Spent", value: "৳42,500", icon: Wallet, helper: "Lifetime expenditure", href: "/billing" },
+  { title: "Total Bookings", value: "0", icon: CalendarDays, helper: "All time reservations", href: "/bookings" },
+  { title: "Pending Bookings", value: "0", icon: Clock, helper: "Awaiting confirmation", href: "/bookings/pending" },
+  { title: "Completed Bookings", value: "0", icon: CheckCircle, helper: "Successfully finished stays", href: "/bookings/completed" },
+  { title: "Total Spent", value: "৳00", icon: Wallet, helper: "Lifetime expenditure", href: "/billing" },
 ];
 
 const recentBookings = [
@@ -33,6 +31,10 @@ const recentBookings = [
 ];
 
 export default function UserDashboardOverview() {
+  const {data:session, status} = useSession()
+  if(status === "loading"){
+    return <p>...</p>
+  }
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "Pending":
@@ -54,7 +56,7 @@ export default function UserDashboardOverview() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
           <div>
             <h1 className="text-xl sm:text-2xl font-bold text-slate-950 tracking-tight">
-              Welcome back, {userProfile.name}! 👋
+              Welcome back, {session?.user?.name}! 👋
             </h1>
             <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
               Here is a summary of your recent activities and bookings overview.
@@ -73,9 +75,9 @@ export default function UserDashboardOverview() {
           {statsData.map((stat, idx) => {
             const Icon = stat.icon;
             return (
-              <Link
+              <div
                 key={idx}
-                href={stat.href}
+                // href={stat.href}
                 className="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-200 transition-all flex items-center justify-between group"
               >
                 <div className="space-y-1">
@@ -88,7 +90,7 @@ export default function UserDashboardOverview() {
                 <div className="p-4 bg-blue-50 text-blue-600 rounded-2xl border border-blue-100 group-hover:bg-blue-600 group-hover:text-white transition-all">
                   <Icon size={24} />
                 </div>
-              </Link>
+              </div>
             );
           })}
         </section>
@@ -100,9 +102,9 @@ export default function UserDashboardOverview() {
         <section className="space-y-3">
           <div className="flex items-center justify-between">
             <h2 className="text-base font-bold text-slate-900">Recent Bookings</h2>
-            <Link href="/bookings" className="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1">
+            {/* <Link href="/bookings" className="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1">
               View All <ChevronRight size={14} />
-            </Link>
+            </Link> */}
           </div>
 
           <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
@@ -129,9 +131,9 @@ export default function UserDashboardOverview() {
                       <td className="py-4 px-6 font-semibold text-slate-900">{b.totalPrice}</td>
                       <td className="py-4 px-6">{getStatusBadge(b.status)}</td>
                       <td className="py-4 px-6 text-right">
-                        <Link href={`/bookings/${b.id}`} className="inline-block p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 transition-colors">
+                        <div className="inline-block p-2 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer">
                           <Eye size={15} />
-                        </Link>
+                        </div>
                       </td>
                     </tr>
                   ))}
