@@ -6,7 +6,8 @@ import {
   Star, 
   CalendarCheck, 
   User, 
-  LogOut 
+  LogOut, 
+  Heart
 } from 'lucide-react';
 import Logo from '@/components/shared/Logo/Logo';
 import { signOut } from 'next-auth/react';
@@ -26,6 +27,11 @@ const sidebarLinks = [
     name: 'Booking',
     href: '/user/my-booking',
     icon: <CalendarCheck size={20} />,
+  },
+  {
+    name: 'Wishlist',
+    href: '/user/my-wishlist',
+    icon: <Heart size={20} />,
   },
   {
     name: 'Profile',

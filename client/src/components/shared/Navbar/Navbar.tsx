@@ -22,9 +22,15 @@ export default function Navbar() {
     { name: 'DASHBOARD', path: '/user' },
   ];
 
+  const dashboardLinks = [
+    { name: 'Booking', path: '/user/booking', icon: CalendarCheck },
+    { name: 'Profile', path: '/user/profile', icon: User },
+    { name: 'Wishlist', path: '/user/wishlist', icon: Heart },
+  ];
+
   const { data: session, status } = useSession();
 
-  // ড্রপডাউনের বাইরে ক্লিক করলে ড্রপডাউন বন্ধ হয়ে যাবে
+  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -69,7 +75,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center relative" ref={dropdownRef}>
             {session?.user ? (
               <div className="relative">
-                {/* Profile Avatar Trigger (Only Icon/Image, No Name) */}
+                {/* Profile Avatar Trigger */}
                 <button
                   onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
                   className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-[#ff2e63] bg-[#1e293b] flex items-center justify-center hover:scale-105 transition-all cursor-pointer shadow-sm"
@@ -87,7 +93,7 @@ export default function Navbar() {
                   )}
                 </button>
 
-                {/* Fixed Clean Theme Dropdown Menu */}
+                {/* Dropdown Menu */}
                 {isProfileDropdownOpen && (
                   <div className="absolute right-0 mt-3 w-60 bg-white text-gray-800 border border-gray-100 rounded-2xl shadow-2xl py-2 z-50 animate-in fade-in zoom-in-95 duration-150">
                     
@@ -102,32 +108,20 @@ export default function Navbar() {
                     </div>
 
                     {/* Links */}
-                    <Link
-                      href="/user/booking"
-                      onClick={() => setIsProfileDropdownOpen(false)}
-                      className="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-gray-700 hover:bg-gray-100 transition-colors"
-                    >
-                      <CalendarCheck size={16} className="text-[#ff2e63]" />
-                      <span>Booking</span>
-                    </Link>
-
-                    <Link
-                      href="/user/profile"
-                      onClick={() => setIsProfileDropdownOpen(false)}
-                      className="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-gray-700 hover:bg-gray-100 transition-colors"
-                    >
-                      <User size={16} className="text-[#ff2e63]" />
-                      <span>Profile</span>
-                    </Link>
-
-                    <Link
-                      href="/user/wishlist"
-                      onClick={() => setIsProfileDropdownOpen(false)}
-                      className="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-gray-700 hover:bg-gray-100 transition-colors"
-                    >
-                      <Heart size={16} className="text-[#ff2e63]" />
-                      <span>Wishlist</span>
-                    </Link>
+                    {dashboardLinks.map((item) => {
+                      const IconComponent = item.icon;
+                      return (
+                        <Link
+                          key={item.path}
+                          href={item.path}
+                          onClick={() => setIsProfileDropdownOpen(false)}
+                          className="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-gray-700 hover:bg-gray-100 transition-colors"
+                        >
+                          <IconComponent size={16} className="text-[#ff2e63]" />
+                          <span>{item.name}</span>
+                        </Link>
+                      );
+                    })}
 
                     <div className="my-1 border-t border-gray-100" />
 
@@ -156,19 +150,68 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Mobile Right Side: Profile Avatar + Hamburger Toggle */}
-          <div className="lg:hidden flex items-center gap-3">
+          {/* Mobile Right Side: Profile Avatar with Dropdown + Hamburger Toggle */}
+          <div className="lg:hidden flex items-center gap-3" ref={dropdownRef}>
             {session?.user && (
-              <Link
-                href="/user/profile"
-                className="relative w-9 h-9 rounded-full overflow-hidden border-2 border-[#ff2e63] bg-[#1e293b] flex items-center justify-center shadow-sm"
-              >
-                {session.user.image ? (
-                  <Image src={session.user.image} alt="User" fill className="object-cover" />
-                ) : (
-                  <User size={18} className="text-gray-200" />
+              <div className="relative">
+                <button
+                  onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
+                  className="relative w-9 h-9 rounded-full overflow-hidden border-2 border-[#ff2e63] bg-[#1e293b] flex items-center justify-center shadow-sm cursor-pointer"
+                  aria-label="Toggle Mobile Profile Menu"
+                >
+                  {session.user.image ? (
+                    <Image src={session.user.image} alt="User" fill className="object-cover" />
+                  ) : (
+                    <User size={18} className="text-gray-200" />
+                  )}
+                </button>
+
+                {/* Mobile Dropdown Menu (Same as Desktop Style) */}
+                {isProfileDropdownOpen && (
+                  <div className="absolute right-0 mt-3 w-60 bg-white text-gray-800 border border-gray-100 rounded-2xl shadow-2xl py-2 z-50 animate-in fade-in zoom-in-95 duration-150">
+                    
+                    {/* User Info Header */}
+                    <div className="px-4 py-3 border-b border-gray-100 mb-1 bg-gray-50/60">
+                      <p className="text-xs font-black uppercase tracking-tight text-gray-900 truncate">
+                        {session.user.name || "User"}
+                      </p>
+                      <p className="text-[10px] text-gray-500 font-medium truncate mt-0.5">
+                        {session.user.email}
+                      </p>
+                    </div>
+
+                    {/* Links */}
+                    {dashboardLinks.map((item) => {
+                      const IconComponent = item.icon;
+                      return (
+                        <Link
+                          key={item.path}
+                          href={item.path}
+                          onClick={() => setIsProfileDropdownOpen(false)}
+                          className="flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-gray-700 hover:bg-gray-100 transition-colors"
+                        >
+                          <IconComponent size={16} className="text-[#ff2e63]" />
+                          <span>{item.name}</span>
+                        </Link>
+                      );
+                    })}
+
+                    <div className="my-1 border-t border-gray-100" />
+
+                    {/* Logout Option */}
+                    <button
+                      onClick={() => {
+                        setIsProfileDropdownOpen(false);
+                        signOut();
+                      }}
+                      className="w-full flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer text-left"
+                    >
+                      <LogOut size={16} />
+                      <span>Logout</span>
+                    </button>
+                  </div>
                 )}
-              </Link>
+              </div>
             )}
 
             <button
@@ -182,7 +225,7 @@ export default function Navbar() {
         </div>
       </Container>
 
-      {/* Mobile Drawer Overlay */}
+      {/* Mobile Drawer Overlay for Hamburger Menu */}
       <div
         className={`fixed inset-0 bg-black/70 backdrop-blur-sm z-[60] transition-opacity duration-300 lg:hidden ${
           isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
@@ -190,7 +233,7 @@ export default function Navbar() {
         onClick={() => setIsMobileMenuOpen(false)}
       />
 
-      {/* Mobile Sidebar Navigation */}
+      {/* Mobile Sidebar Navigation (Main Hamburger Menu - Only Main Links) */}
       <div
         className={`fixed top-0 right-0 h-full w-[280px] bg-[#121c24] z-[70] shadow-2xl border-l border-white/10 transition-transform duration-300 ease-out lg:hidden ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
@@ -208,23 +251,6 @@ export default function Navbar() {
               <X size={22} />
             </button>
           </div>
-
-          {/* Mobile User Info Section */}
-          {session?.user && (
-            <div className="flex items-center gap-3 py-4 border-b border-white/10 my-2">
-              <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-[#ff2e63] bg-gray-800 flex items-center justify-center">
-                {session.user.image ? (
-                  <Image src={session.user.image} alt="User" fill className="object-cover" />
-                ) : (
-                  <User size={18} />
-                )}
-              </div>
-              <div className="truncate">
-                <p className="text-xs font-bold uppercase truncate">{session.user.name || "User"}</p>
-                <p className="text-[10px] text-gray-400 truncate">{session.user.email}</p>
-              </div>
-            </div>
-          )}
 
           <div className="flex flex-col space-y-3 mt-4">
             {navLinks.map((link) => {
@@ -245,37 +271,6 @@ export default function Navbar() {
                 </Link>
               );
             })}
-
-            {/* Extra Mobile Dashboard Menu Links */}
-            {session?.user && (
-              <>
-                <div className="pt-2 pb-1 text-[10px] font-bold tracking-widest uppercase text-gray-500">Dashboard Quick Links</div>
-                <Link
-                  href="/user/booking"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-gray-300 hover:bg-white/5 hover:text-white"
-                >
-                  <span>Booking</span>
-                  <CalendarCheck size={16} className="text-[#ff2e63]" />
-                </Link>
-                <Link
-                  href="/user/profile"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-gray-300 hover:bg-white/5 hover:text-white"
-                >
-                  <span>Profile</span>
-                  <User size={16} className="text-[#ff2e63]" />
-                </Link>
-                <Link
-                  href="/user/wishlist"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-gray-300 hover:bg-white/5 hover:text-white"
-                >
-                  <span>Wishlist</span>
-                  <Heart size={16} className="text-[#ff2e63]" />
-                </Link>
-              </>
-            )}
           </div>
 
           <div className="mt-auto pt-4 border-t border-white/10">
