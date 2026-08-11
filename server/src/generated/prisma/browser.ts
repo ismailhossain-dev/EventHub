@@ -28,11 +28,6 @@ export type User = Prisma.UserModel
  */
 export type Room = Prisma.RoomModel
 /**
- * Model Review
- * 
- */
-export type Review = Prisma.ReviewModel
-/**
  * Model Booking
  * 
  */

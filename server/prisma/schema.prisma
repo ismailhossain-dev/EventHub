@@ -15,7 +15,7 @@ model User {
   role      Role      @default(USER)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  reviews   Review[]
+  // reviews   Review[]
   bookings  Booking[]
 
   @@map("users")
@@ -39,46 +39,54 @@ model Room {
   isDeleted    Boolean   @default(false)
   createdAt    DateTime  @default(now())
   phone        String
-  reviews      Review[]
+  // reviews      Review[]
   bookings     Booking[]
 }
 
-model Review {
-  id         String   @id @default(cuid())
-  rating     Int
-  comment    String
-  isApproved Boolean  @default(true)
-  userId     String
-  roomId     String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  room       Room     @relation(fields: [roomId], references: [id])
-  user       User     @relation(fields: [userId], references: [id])
-}
+// model Review {
+//   id         String   @id @default(cuid())
+//   rating     Int
+//   comment    String
+//   isApproved Boolean  @default(true)
+//   userId     String
+//   roomId     String
+//   createdAt  DateTime @default(now())
+//   updatedAt  DateTime @updatedAt
+//   room       Room     @relation(fields: [roomId], references: [id])
+//   user       User     @relation(fields: [userId], references: [id])
+// }
 
 model Booking {
-  id String @id @default(cuid())
+  id        String   @id @default(cuid())
 
-  userId String
-  roomId String
+  userId    String
+  roomId    String
 
   roomTitle String
   roomImage String
   price     Int
 
-  name    String
-  email   String
-  phone   String
-  address String
-  message String?
+  name      String
+  email     String
+  phone     String
+  address   String
+  message   String?
 
-  status BookingStatus @default(PENDING)
+  status    BookingStatus @default(PENDING)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   user User @relation(fields: [userId], references: [id])
   room Room @relation(fields: [roomId], references: [id])
+
+  @@map("booking")
+}
+
+enum BookingStatus {
+  PENDING
+  COMPLETE
+  REJECTED
 }
 
 enum Role {
@@ -86,9 +94,4 @@ enum Role {
   ADMIN
 }
 
-enum BookingStatus {
-  PENDING
-  CONFIRMED
-  CANCELLED
-  COMPLETED
-}
+

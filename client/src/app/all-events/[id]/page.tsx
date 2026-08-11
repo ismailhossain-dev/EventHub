@@ -151,7 +151,7 @@ export default async function RoomDetailsPage({ params }: RoomDetailsPageProps) 
               </div>
 
               {/* Booking Form Component */}
-              <BookingForm  />
+              <BookingForm room={room} />
 
               {/* Review Form Component */}
               <ReviewForm />
